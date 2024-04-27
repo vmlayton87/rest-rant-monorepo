@@ -15,8 +15,23 @@ router.post('/', async (req, res) => {
     } else {
         res.json({ user })
     }
-
+    req.session.userId=user.userId
     console.log(user)
 })
+
+router.get('/profile', async (req, res) => {
+    console.log('consolelogged userid:', req.session.userId)
+    try {
+        let user = await User.findOne({
+            where: {
+                userId: req.session.userId
+            }
+        })
+        res.json(user)
+    } catch {
+        res.json(null)
+    }
+})
+
 
 module.exports = router
