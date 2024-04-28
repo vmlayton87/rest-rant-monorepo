@@ -4,12 +4,22 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const app = express();
+const cookieSession = require('cookie-session')
 
 // Express Settings
+app.use(cookieSession({
+    name: 'session',
+    keys: [ process.env.SESSION_SECRET ],
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}))
+
+// so that we can include credentials in the fetch using sessions for logged in user
 app.use(cors({
     origin: 'http://localhost:3000',
     credentials: true
 }))
+
+
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(bodyParser.json())
@@ -20,6 +30,7 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use('/places', require('./controllers/places'))
 app.use('/users', require('./controllers/users'))
+app.use('/authentication', require('./controllers/authentication'))
 
 // Listen for Connections
 app.listen(process.env.PORT, () => {
