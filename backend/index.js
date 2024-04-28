@@ -6,7 +6,10 @@ const cors = require('cors')
 const app = express();
 
 // Express Settings
-app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}))
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(bodyParser.json())
