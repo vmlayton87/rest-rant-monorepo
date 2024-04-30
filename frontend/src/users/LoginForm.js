@@ -28,13 +28,14 @@ function LoginForm() {
                 },
                 body: JSON.stringify(credentials)
             });
-            console.log('credentials after try: ', credentials)
+            console.log('credentials after try in login form: ', credentials)
             const data = await response.json();
-            console.log('data after response.json: ', data)
+            console.log('data after response.json in login form: ', data)
         
             if (response.ok) {  
                 setCurrentUser(data.user);
                 localStorage.setItem('token', data.token);
+                console.log('token: ', data.token)
                 history.push(`/`);
             } else {
                 setErrorMessage(data.message);
