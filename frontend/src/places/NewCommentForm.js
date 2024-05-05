@@ -1,26 +1,32 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { useHistory } from "react-router"
+import { CurrentUser } from '../contexts/CurrentUser'
 
 function NewCommentForm({ place, onSubmit }) {
 
     // const [authors, setAuthors] = useState([])
+    const { currentUser } = useContext(CurrentUser)
 
     const [comment, setComment] = useState({
         content: '',
         stars: 3,
         rant: false,
-        authorId: ''
+        // authorId: ''
     })
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await fetch(`http://localhost:5000/users`)
-            const users = await response.json()
-            setComment({ ...comment, authorId: users[0]?.userId})
-            // setAuthors(users)
-        }
-        fetchData()
-    }, [])
+    if(!currentUser){
+        return <p>You must be logged in to leave a rant or rave.</p>
+    }
+
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         const response = await fetch(`http://localhost:5000/users`)
+    //         const users = await response.json()
+    //         setComment({ ...comment, authorId: users[0]?.userId})
+    //         // setAuthors(users)
+    //     }
+    //     fetchData()
+    // }, [])
 
     // let authorOptions = authors.map(author => {
     //     return <option key={author.userId} value={author.userId}>{author.firstName} {author.lastName}</option>
