@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
 })
 
 router.get('/profile', async (req, res) => {
-    console.log('consolelogged userid:', req.session.userId)
+    // console.log('consolelogged userid:', req.session.userId)
     res.json(req.currentUser)
     // try {
     //     // splits the authentication header from CurrentUser fetch into [Bearer, 'token']

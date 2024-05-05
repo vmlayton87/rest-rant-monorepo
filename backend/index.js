@@ -8,11 +8,11 @@ const cookieSession = require('cookie-session')
 const defineCurrentUser = require('./middleware/defineCurrentUser')
 
 // Express Settings
-app.use(cookieSession({
-    name: 'session',
-    keys: [ process.env.SESSION_SECRET ],
-    maxAge: 24 * 60 * 60 * 1000 // 24 hours
-}))
+// app.use(cookieSession({
+//     name: 'session',
+//     keys: [ process.env.SESSION_SECRET ],
+//     maxAge: 24 * 60 * 60 * 1000 // 24 hours
+// }))
 
 // so that we can include credentials in the fetch using sessions for logged in user
 app.use(cors({
